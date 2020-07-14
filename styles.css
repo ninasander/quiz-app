@@ -49,6 +49,6 @@ footer {
   flex-direction: row;
   justify-content: space-evenly;
   list-style-type: none;
-  padding: 28px 0;
+  padding: 28px 2px;
   margin: 0;
 }
