@@ -20,18 +20,22 @@ main {
   overflow: scroll;
 }
 
-.bookmark {
-  margin-left: 80%;
-}
-
 .card {
+  display: flex;
+  flex-wrap: wrap;
   background-color: lightcyan;
   border: 4px solid powderblue;
-  padding: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
   margin: 20px 0;
 }
 
-.tags {
+.card__bookmark {
+  margin-left: 80%;
+  margin-top: -50%;
+}
+
+.card__tags {
   display: flex;
   max-width: 100%;
   list-style-type: none;
