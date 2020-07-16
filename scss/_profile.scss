@@ -1,3 +1,17 @@
+.profile__intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__image {
+  display: inline-block;
+}
+
+.profile__name {
+  display: inline-block;
+}
+
 .profile__button {
   display: block;
   position: relative;
