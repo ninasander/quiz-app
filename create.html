@@ -1,50 +1,89 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quiz App</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body class="f-size-18 m-0">
     <header>
-        <h1>CREATE</h1>
+      <h1 class="darkred">CREATE</h1>
     </header>
 
-    <main>
-        <section> <!-- -->
-            <form action="" method="get" class="">
-                <div class=""> <!-- Question-Form -->
-                    <label for="question">Enter your question:</label>
-                    <input type="text" name="question"> 
-                </div>
-                <div class=""> <!-- Answer-Form -->
-                    <label for="question">Enter the answer:</label>
-                    <input type="text" name="question"> 
-                </div>
-                <div class=""> <!-- Tag-Form -->
-                    <label for="question">Enter your tags:</label>
-                    <input type="text" name="question"> 
-                </div>
-                <div class="">
-                    <input type="submit" value="Submit">
-                </div>
-            </form>
-        </section>
+    <main class="m-t-b-44 p-20 darkblue">
+      <section>
+        <!-- -->
+        <form action="" method="get" class="p-20 w-100p">
+          <div class="">
+            <!-- Question-Form -->
+            <label for="question" class="m-t-b-10">Your new question:</label>
+            <textarea
+              name="question"
+              id="question"
+              cols="30"
+              rows="8"
+              placeholder="Enter your new question here"
+              class="p-10 m-t-b-10 blue"
+            ></textarea>
+          </div>
+          <div class="">
+            <!-- Answer-Form -->
+            <label for="question" class="m-t-b-10">Your answer:</label>
+            <textarea
+              name="answer"
+              id="answer"
+              cols="30"
+              rows="8"
+              placeholder="Enter your answer here"
+              class="p-10 m-t-b-10 blue"
+            ></textarea>
+          </div>
+          <div class="m-t-b-10">
+            <!-- Tag-Form -->
+            <label for="question" class="m-t-b-10">Enter your tags:</label>
+            <input type="text" name="question" />
+          </div>
+          <div class="">
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      </section>
     </main>
 
-    <footer>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="bookmarks.html">Bookmarks</a></li>
-                <li><a href="create.html">Create</a></li>
-                <li><a href="profile.html">Profile</a></li>
-            </ul>
-        </nav>
+    <footer class="h-64 b-0 w-100p">
+      <nav>
+        <ul class="nav w-100p m-t-b-10 p-0">
+          <li>
+            <a href="index.html" class="nav__home"
+              ><img src="images/nav-home.svg" alt="Home" class="nav__icon"
+            /></a>
+          </li>
+          <li>
+            <a href="bookmarks.html" class="nav__bookmarks"
+              ><img
+                src="images/nav-bookmarks.svg"
+                alt="Bookmarks"
+                class="nav__icon"
+            /></a>
+          </li>
+          <li>
+            <a href="create.html" class="nav__create"
+              ><img src="images/nav-create.svg" alt="Create" class="nav__icon"
+            /></a>
+          </li>
+          <li>
+            <a href="profile.html" class="nav__profile"
+              ><img
+                src="images/nav-profile.svg"
+                alt="Profile"
+                class="nav__icon"
+            /></a>
+          </li>
+        </ul>
+      </nav>
     </footer>
-</body>
-
+  </body>
 </html>
