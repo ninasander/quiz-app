@@ -58,19 +58,19 @@
   width: 40px;
   height: 40px;
 }
-.darkred {
+.color-accent {
   color: $darkred;
 }
 
-.darkblue {
+.color-dark {
   color: $darkblue;
 }
 
-.blue {
+.color-main {
   color: $blue;
 }
 
-.lightblue {
+.color-light {
   color: $lightblue;
 }
 
@@ -80,4 +80,20 @@
 
 .font-p {
   font-family: 'Poppins', sans-serif;
+}
+
+.s-box {
+  box-shadow: 4px 4px 8px $darkblue;
+}
+
+.s-header {
+  box-shadow: 0 4px 8px $darkblue;
+}
+
+.s-footer {
+  box-shadow: 0 -4px 8px $darkblue;
+}
+
+.bg-color {
+  background-color: $lightblue;
 }

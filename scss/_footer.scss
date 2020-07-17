@@ -1,24 +1,21 @@
 footer {
   position: fixed;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-color: powderblue;
 }
 
 .nav {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   list-style-type: none;
+  width: 100vw;
 }
 
 .nav__icon {
-  width: 40px;
+  width: 50px;
   margin: 10px;
-  border-left: 2px solid white;
-}
-
-.nav__home {
-  text-decoration: none;
+  padding-left: 10px;
 }
