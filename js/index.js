@@ -19,7 +19,8 @@ var main = get('main');
 var header = get('header');
 var footer = get('footer');
 var svg = get('svg');
-var darkmodeSwitch = get('.button__darkmode'); // Darkmode Switch
+var darkmodeSwitch = get('.button__darkmode'); //Clear Form on Submit
+// Darkmode Switch
 
 darkmodeSwitch.addEventListener('click', function () {
   main.classList.toggle('darkmode');

@@ -18,6 +18,7 @@ const header = get('header')
 const footer = get('footer')
 const svg = get('svg')
 const darkmodeSwitch = get('.button__darkmode')
+//Clear Form on Submit
 
 // Darkmode Switch
 darkmodeSwitch.addEventListener('click', () => {
