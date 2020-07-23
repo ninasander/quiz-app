@@ -1,43 +1,72 @@
-const buttonIndex = document.querySelector('.nav__home')
-const buttonBookmarks = document.querySelector('.nav__bookmarks')
-const buttonCreate = document.querySelector('.nav__create')
-const buttonProfile = document.querySelector('.nav__profile')
-const pageIndex = document.querySelector('.page__index')
-const pageBookmarks = document.querySelector('.page__bookmarks')
-const pageCreate = document.querySelector('.page__create')
-const pageProfile = document.querySelector('.page__profile')
+// Navigation
+const buttonIndex = get('.nav__home')
+const buttonBookmarks = get('.nav__bookmarks')
+const buttonCreate = get('.nav__create')
+const buttonProfile = get('.nav__profile')
+const pageIndex = get('.page__index')
+const pageBookmarks = get('.page__bookmarks')
+const pageCreate = get('.page__create')
+const pageProfile = get('.page__profile')
+// Bookmark Toggle
+const bookmark = get('.card__bookmark')
+// Show Answer Button
+const buttonAnswer = get('.card__button')
+const answerText = get('.card__answer')
+// Darkmode Switch
+const main = get('main')
+const header = get('header')
+const footer = get('footer')
+const svg = get('svg')
+const darkmodeSwitch = get('.button__darkmode')
 
-// buttonNav.addEventListener('click', () => {
-//     pageBookmarks.classList.add('hidden')
-//     pageCreate.classList.add('hidden')
-//     pageProfile.classList.add('hidden')
-//     pageIndex.classList.remove('hidden')
-//   })
+// Darkmode Switch
+darkmodeSwitch.addEventListener('click', () => {
+  main.classList.toggle('darkmode')
+  header.classList.toggle('darkmode')
+  footer.classList.toggle('darkmode')
+  svg.classList.toggle('svg__darkmode')
+})
 
+// Bookmark Toggle
+bookmark.addEventListener('click', () => {
+  bookmark.classList.toggle('card__bookmark--active')
+})
+
+// Show Answer Button
+buttonAnswer.addEventListener('click', () => {
+  answerText.classList.toggle('hidden')
+  if (buttonAnswer.textContent === 'SHOW ANSWER') {
+    buttonAnswer.textContent = 'HIDE ANSWER'
+  } else {
+    buttonAnswer.textContent = 'SHOW ANSWER'
+  }
+})
+
+// Navigation
 buttonIndex.addEventListener('click', () => {
-  pageBookmarks.classList.add('hidden')
-  pageCreate.classList.add('hidden')
-  pageProfile.classList.add('hidden')
-  pageIndex.classList.remove('hidden')
+  nav(pageIndex)
 })
 
 buttonBookmarks.addEventListener('click', () => {
-  pageBookmarks.classList.remove('hidden')
-  pageCreate.classList.add('hidden')
-  pageProfile.classList.add('hidden')
-  pageIndex.classList.add('hidden')
+  nav(pageBookmarks)
 })
 
 buttonCreate.addEventListener('click', () => {
-  pageBookmarks.classList.add('hidden')
-  pageCreate.classList.remove('hidden')
-  pageProfile.classList.add('hidden')
-  pageIndex.classList.add('hidden')
+  nav(pageCreate)
 })
 
 buttonProfile.addEventListener('click', () => {
+  nav(pageProfile)
+})
+
+function nav(currentPage) {
+  pageIndex.classList.add('hidden')
   pageBookmarks.classList.add('hidden')
   pageCreate.classList.add('hidden')
-  pageProfile.classList.remove('hidden')
-  pageIndex.classList.add('hidden')
-})
+  pageProfile.classList.add('hidden')
+  currentPage.classList.add('hidden')
+}
+
+function get(selector) {
+  return document.querySelector(selector)
+}

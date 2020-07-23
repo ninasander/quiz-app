@@ -1,40 +1,68 @@
 "use strict";
 
-var buttonIndex = document.querySelector('.nav__home');
-var buttonBookmarks = document.querySelector('.nav__bookmarks');
-var buttonCreate = document.querySelector('.nav__create');
-var buttonProfile = document.querySelector('.nav__profile');
-var pageIndex = document.querySelector('.page__index');
-var pageBookmarks = document.querySelector('.page__bookmarks');
-var pageCreate = document.querySelector('.page__create');
-var pageProfile = document.querySelector('.page__profile'); // buttonNav.addEventListener('click', () => {
-//     pageBookmarks.classList.add('hidden')
-//     pageCreate.classList.add('hidden')
-//     pageProfile.classList.add('hidden')
-//     pageIndex.classList.remove('hidden')
-//   })
+// Navigation
+var buttonIndex = get('.nav__home');
+var buttonBookmarks = get('.nav__bookmarks');
+var buttonCreate = get('.nav__create');
+var buttonProfile = get('.nav__profile');
+var pageIndex = get('.page__index');
+var pageBookmarks = get('.page__bookmarks');
+var pageCreate = get('.page__create');
+var pageProfile = get('.page__profile'); // Bookmark Toggle
+
+var bookmark = get('.card__bookmark'); // Show Answer Button
+
+var buttonAnswer = get('.card__button');
+var answerText = get('.card__answer'); // Darkmode Switch
+
+var main = get('main');
+var header = get('header');
+var footer = get('footer');
+var svg = get('svg');
+var darkmodeSwitch = get('.button__darkmode'); // Darkmode Switch
+
+darkmodeSwitch.addEventListener('click', function () {
+  main.classList.toggle('darkmode');
+  header.classList.toggle('darkmode');
+  footer.classList.toggle('darkmode');
+  svg.classList.toggle('svg__darkmode');
+}); // Bookmark Toggle
+
+bookmark.addEventListener('click', function () {
+  bookmark.classList.toggle('card__bookmark--active');
+}); // Show Answer Button
+
+buttonAnswer.addEventListener('click', function () {
+  answerText.classList.toggle('hidden');
+
+  if (buttonAnswer.textContent === 'SHOW ANSWER') {
+    buttonAnswer.textContent = 'HIDE ANSWER';
+  } else {
+    buttonAnswer.textContent = 'SHOW ANSWER';
+  }
+}); // Navigation
 
 buttonIndex.addEventListener('click', function () {
-  pageBookmarks.classList.add('hidden');
-  pageCreate.classList.add('hidden');
-  pageProfile.classList.add('hidden');
-  pageIndex.classList.remove('hidden');
+  nav(pageIndex);
 });
 buttonBookmarks.addEventListener('click', function () {
-  pageBookmarks.classList.remove('hidden');
-  pageCreate.classList.add('hidden');
-  pageProfile.classList.add('hidden');
-  pageIndex.classList.add('hidden');
+  nav(pageBookmarks);
 });
 buttonCreate.addEventListener('click', function () {
-  pageBookmarks.classList.add('hidden');
-  pageCreate.classList.remove('hidden');
-  pageProfile.classList.add('hidden');
-  pageIndex.classList.add('hidden');
+  nav(pageCreate);
 });
 buttonProfile.addEventListener('click', function () {
+  nav(pageProfile);
+});
+
+function nav(currentPage) {
+  pageIndex.classList.add('hidden');
   pageBookmarks.classList.add('hidden');
   pageCreate.classList.add('hidden');
-  pageProfile.classList.remove('hidden');
-  pageIndex.classList.add('hidden');
-});
+  pageProfile.classList.add('hidden');
+  currentPage.classList.add('hidden');
+}
+
+function get(selector) {
+  return document.querySelector(selector);
+}

@@ -8,9 +8,14 @@
 
 .card__bookmark {
   margin-left: 80%;
-  margin-top: -4%;
+  margin-top: -5%;
   border: none;
   background: none;
+  color: #9dcadb;
+}
+
+.card__bookmark--active {
+  color: #690038;
 }
 
 .card__button {
