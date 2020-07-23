@@ -19,6 +19,8 @@ const footer = get('footer')
 const svg = get('svg')
 const darkmodeSwitch = get('.button__darkmode')
 //Clear Form on Submit
+const form = get('form')
+const formSubmit = get('.form__button')
 
 // Darkmode Switch
 darkmodeSwitch.addEventListener('click', () => {
@@ -60,12 +62,17 @@ buttonProfile.addEventListener('click', () => {
   nav(pageProfile)
 })
 
+//Clear Form on Submit
+formSubmit.addEventListener('click', () => {
+  form.reset()
+})
+
 function nav(currentPage) {
   pageIndex.classList.add('hidden')
   pageBookmarks.classList.add('hidden')
   pageCreate.classList.add('hidden')
   pageProfile.classList.add('hidden')
-  currentPage.classList.add('hidden')
+  currentPage.classList.remove('hidden')
 }
 
 function get(selector) {
