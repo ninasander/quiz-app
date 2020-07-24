@@ -117,76 +117,160 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-"use strict"; // Navigation
+})({"src/js/util.js":[function(require,module,exports) {
+"use strict";
 
-var buttonIndex = get('.nav__home');
-var buttonBookmarks = get('.nav__bookmarks');
-var buttonCreate = get('.nav__create');
-var buttonProfile = get('.nav__profile');
-var pageIndex = get('.page__index');
-var pageBookmarks = get('.page__bookmarks');
-var pageCreate = get('.page__create');
-var pageProfile = get('.page__profile'); // Bookmark Toggle
-
-var bookmark = get('.card__bookmark'); // Show Answer Button
-
-var buttonAnswer = get('.card__button');
-var answerText = get('.card__answer'); // Darkmode Switch
-
-var main = get('main');
-var header = get('header');
-var footer = get('footer');
-var svg = get('svg');
-var darkmodeSwitch = get('.button__darkmode'); //Clear Form on Submit
-// Darkmode Switch
-
-darkmodeSwitch.addEventListener('click', function () {
-  main.classList.toggle('darkmode');
-  header.classList.toggle('darkmode');
-  footer.classList.toggle('darkmode');
-  svg.classList.toggle('svg__darkmode');
-}); // Bookmark Toggle
-
-bookmark.addEventListener('click', function () {
-  bookmark.classList.toggle('card__bookmark--active');
-}); // Show Answer Button
-
-buttonAnswer.addEventListener('click', function () {
-  answerText.classList.toggle('hidden');
-
-  if (buttonAnswer.textContent === 'SHOW ANSWER') {
-    buttonAnswer.textContent = 'HIDE ANSWER';
-  } else {
-    buttonAnswer.textContent = 'SHOW ANSWER';
-  }
-}); // Navigation
-
-buttonIndex.addEventListener('click', function () {
-  nav(pageIndex);
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-buttonBookmarks.addEventListener('click', function () {
-  nav(pageBookmarks);
-});
-buttonCreate.addEventListener('click', function () {
-  nav(pageCreate);
-});
-buttonProfile.addEventListener('click', function () {
-  nav(pageProfile);
-});
-
-function nav(currentPage) {
-  pageIndex.classList.add('hidden');
-  pageBookmarks.classList.add('hidden');
-  pageCreate.classList.add('hidden');
-  pageProfile.classList.add('hidden');
-  currentPage.classList.add('hidden');
-}
+exports.get = get;
+exports.getAll = getAll;
 
 function get(selector) {
   return document.querySelector(selector);
 }
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function getAll(selector) {
+  return document.querySelectorAll(selector);
+}
+},{}],"src/js/navigation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initNavigation = initNavigation;
+
+var _util = require("./util");
+
+function initNavigation() {
+  // Navigation
+  var buttonIndex = (0, _util.get)('.nav__home');
+  var buttonBookmarks = (0, _util.get)('.nav__bookmarks');
+  var buttonCreate = (0, _util.get)('.nav__create');
+  var buttonProfile = (0, _util.get)('.nav__profile');
+  var pageIndex = (0, _util.get)('.page__index');
+  var pageBookmarks = (0, _util.get)('.page__bookmarks');
+  var pageCreate = (0, _util.get)('.page__create');
+  var pageProfile = (0, _util.get)('.page__profile'); // Navigation
+
+  buttonIndex.addEventListener('click', function () {
+    nav(pageIndex);
+  });
+  buttonBookmarks.addEventListener('click', function () {
+    nav(pageBookmarks);
+  });
+  buttonCreate.addEventListener('click', function () {
+    nav(pageCreate);
+  });
+  buttonProfile.addEventListener('click', function () {
+    nav(pageProfile);
+  });
+
+  function nav(currentPage) {
+    pageIndex.classList.add('hidden');
+    pageBookmarks.classList.add('hidden');
+    pageCreate.classList.add('hidden');
+    pageProfile.classList.add('hidden');
+    currentPage.classList.remove('hidden');
+  }
+}
+},{"./util":"src/js/util.js"}],"src/js/card.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initCardToggle = initCardToggle;
+
+var _util = require("./util");
+
+function initCardToggle() {
+  // Bookmark Toggle
+  var bookmark = (0, _util.get)('.card__bookmark'); // Show Answer Button
+
+  var buttonAnswer = (0, _util.get)('.card__button');
+  var answerText = (0, _util.get)('.card__answer'); // Bookmark Toggle
+
+  bookmark.addEventListener('click', function () {
+    bookmark.classList.toggle('card__bookmark--active');
+  }); // Show Answer Button
+
+  buttonAnswer.addEventListener('click', function () {
+    answerText.classList.toggle('hidden');
+
+    if (buttonAnswer.textContent === 'SHOW ANSWER') {
+      buttonAnswer.textContent = 'HIDE ANSWER';
+    } else {
+      buttonAnswer.textContent = 'SHOW ANSWER';
+    }
+  });
+}
+},{"./util":"src/js/util.js"}],"src/js/form.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.resetForm = resetForm;
+
+var _util = require("./util");
+
+function resetForm() {
+  //Clear Form on Submit
+  var form = (0, _util.get)('form');
+  var formSubmit = (0, _util.get)('.form__button'); //Clear Form on Submit
+
+  formSubmit.addEventListener('click', function () {
+    form.reset();
+    form.preventDefault();
+  });
+}
+},{"./util":"src/js/util.js"}],"src/js/darkmode.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initDarkmode = initDarkmode;
+
+var _util = require("./util");
+
+function initDarkmode() {
+  // Darkmode Switch
+  var main = (0, _util.get)('main');
+  var header = (0, _util.get)('header');
+  var footer = (0, _util.get)('footer');
+  var svg = (0, _util.get)('svg');
+  var darkmodeSwitch = (0, _util.get)('.button__darkmode'); // Darkmode Switch
+
+  darkmodeSwitch.addEventListener('click', function () {
+    main.classList.toggle('darkmode');
+    header.classList.toggle('darkmode');
+    footer.classList.toggle('darkmode');
+    svg.classList.toggle('svg__darkmode');
+  });
+}
+},{"./util":"src/js/util.js"}],"src/js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _util = require("./util");
+
+var _navigation = require("./navigation");
+
+var _card = require("./card");
+
+var _form = require("./form");
+
+var _darkmode = require("./darkmode");
+
+(0, _util.get)();
+(0, _util.getAll)();
+(0, _navigation.initNavigation)();
+(0, _card.initCardToggle)();
+(0, _form.resetForm)();
+(0, _darkmode.initDarkmode)();
+},{"./util":"src/js/util.js","./navigation":"src/js/navigation.js","./card":"src/js/card.js","./form":"src/js/form.js","./darkmode":"src/js/darkmode.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -390,5 +474,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/js/index.js"], null)
+//# sourceMappingURL=/js.d818e0ef.js.map
