@@ -12,17 +12,10 @@ footer {
   align-items: center;
   list-style-type: none;
   width: 100vw;
-  background-color: powderblue;
 }
 
 .nav__icon {
   width: 50px;
-}
-
-.nav__home,
-.nav__bookmarks,
-.nav__create,
-.nav__profile {
-  background-color: powderblue;
-  border-style: none;
+  margin: 10px;
+  padding-left: 10px;
 }
