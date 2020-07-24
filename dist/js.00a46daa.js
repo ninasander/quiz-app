@@ -118,7 +118,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
-"use strict"; // Navigation
+'use strict'; // Navigation
 
 var buttonIndex = get('.nav__home');
 var buttonBookmarks = get('.nav__bookmarks');
@@ -139,9 +139,7 @@ var header = get('header');
 var footer = get('footer');
 var svg = get('svg');
 var darkmodeSwitch = get('.button__darkmode'); //Clear Form on Submit
-
-var form = get('form');
-var formSubmit = get('.form__button'); // Darkmode Switch
+// Darkmode Switch
 
 darkmodeSwitch.addEventListener('click', function () {
   main.classList.toggle('darkmode');
@@ -175,10 +173,6 @@ buttonCreate.addEventListener('click', function () {
 });
 buttonProfile.addEventListener('click', function () {
   nav(pageProfile);
-}); //Clear Form on Submit
-
-formSubmit.addEventListener('click', function () {
-  form.reset();
 });
 
 function nav(currentPage) {
@@ -186,7 +180,7 @@ function nav(currentPage) {
   pageBookmarks.classList.add('hidden');
   pageCreate.classList.add('hidden');
   pageProfile.classList.add('hidden');
-  currentPage.classList.remove('hidden');
+  currentPage.classList.add('hidden');
 }
 
 function get(selector) {
@@ -220,7 +214,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65486" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51251" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -397,4 +391,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+//# sourceMappingURL=js.00a46daa.js.map
