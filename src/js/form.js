@@ -8,5 +8,6 @@ export function resetForm() {
   //Clear Form on Submit
   formSubmit.addEventListener('click', () => {
     form.reset()
+    form.preventDefault()
   })
 }
