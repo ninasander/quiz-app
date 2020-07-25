@@ -127,11 +127,13 @@ exports.get = get;
 exports.getAll = getAll;
 
 function get(selector) {
-  return document.querySelector(selector);
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+  return target.querySelector(selector);
 }
 
 function getAll(selector) {
-  return document.querySelectorAll(selector);
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+  return target.querySelectorAll(selector);
 }
 },{}],"src/js/navigation.js":[function(require,module,exports) {
 "use strict";
@@ -212,18 +214,15 @@ function initCardToggle() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resetForm = resetForm;
+exports.initFormReset = initFormReset;
 
 var _util = require("./util");
 
-function resetForm() {
-  //Clear Form on Submit
+function initFormReset() {
   var form = (0, _util.get)('form');
-  var formSubmit = (0, _util.get)('.form__button'); //Clear Form on Submit
-
-  formSubmit.addEventListener('click', function () {
+  form === null || form === void 0 ? void 0 : form.addEventListener('submit', function (event) {
+    event.preventDefault();
     form.reset();
-    form.preventDefault();
   });
 }
 },{"./util":"src/js/util.js"}],"src/js/darkmode.js":[function(require,module,exports) {
@@ -268,7 +267,7 @@ var _darkmode = require("./darkmode");
 (0, _util.getAll)();
 (0, _navigation.initNavigation)();
 (0, _card.initCardToggle)();
-(0, _form.resetForm)();
+(0, _form.initFormReset)();
 (0, _darkmode.initDarkmode)();
 },{"./util":"src/js/util.js","./navigation":"src/js/navigation.js","./card":"src/js/card.js","./form":"src/js/form.js","./darkmode":"src/js/darkmode.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -298,7 +297,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51530" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
