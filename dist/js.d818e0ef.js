@@ -183,30 +183,88 @@ function initNavigation() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.initCardToggle = initCardToggle;
+exports.initShowAnswer = initShowAnswer;
+exports.initBookmarkToggle = initBookmarkToggle;
+exports.initCard = initCard;
+exports.createCard = createCard;
 
 var _util = require("./util");
 
-function initCardToggle() {
-  // Bookmark Toggle
-  var bookmark = (0, _util.get)('.card__bookmark'); // Show Answer Button
-
-  var buttonAnswer = (0, _util.get)('.card__button');
-  var answerText = (0, _util.get)('.card__answer'); // Bookmark Toggle
-
-  bookmark.addEventListener('click', function () {
-    bookmark.classList.toggle('card__bookmark--active');
-  }); // Show Answer Button
-
-  buttonAnswer.addEventListener('click', function () {
-    answerText.classList.toggle('hidden');
-
-    if (buttonAnswer.textContent === 'SHOW ANSWER') {
-      buttonAnswer.textContent = 'HIDE ANSWER';
-    } else {
-      buttonAnswer.textContent = 'SHOW ANSWER';
-    }
+function initShowAnswer() {
+  var cardList = (0, _util.getAll)('section.card');
+  cardList.forEach(function (card) {
+    addToggleLogic(card);
   });
+
+  function addToggleLogic(card) {
+    var textShowAnswer = card.querySelector('.card__answer');
+    var buttonShowAnswer = card.querySelector('.card__button');
+    buttonShowAnswer === null || buttonShowAnswer === void 0 ? void 0 : buttonShowAnswer.addEventListener('click', function () {
+      textShowAnswer.classList.toggle('hidden');
+      buttonShowAnswer.textContent = buttonShowAnswer.textContent === 'Hide answer' ? 'Show answer' : 'Hide answer';
+    });
+  }
+}
+
+function initBookmarkToggle() {
+  var bookmarks = (0, _util.getAll)('.card__bookmark');
+  bookmarks.forEach(function (bookmark) {
+    bookmark.addEventListener('click', bookmarkToggle(bookmark, 'card__bookmark--active'));
+  });
+
+  function bookmarkToggle(bookmark, classname) {
+    return function () {
+      bookmark.classList.toggle(classname);
+    };
+  }
+} // export function initCardToggle() {
+//   // Bookmark Toggle
+//   const bookmark = get('.card__bookmark')
+//   // Show Answer Button
+//   // Bookmark Toggle
+//   bookmark.addEventListener('click', () => {
+//     bookmark.classList.toggle('card__bookmark--active')
+//   })
+// Show Answer Button
+//   buttonAnswer.addEventListener('click', () => {
+//     answerText.classList.toggle('hidden')
+//     if (buttonAnswer.textContent === 'SHOW ANSWER') {
+//       buttonAnswer.textContent = 'HIDE ANSWER'
+//     } else {
+//       buttonAnswer.textContent = 'SHOW ANSWER'
+//     }
+//   })
+
+
+var cardArray = [{
+  question: 'Dies ist unsere Frage Nummer 1',
+  answer: 'Dies ist unsere schlaue Antwort'
+}, {
+  question: 'Dies ist unsere Frage Nummer 2',
+  answer: 'Dies ist unsere schlaue Antwort'
+}, {
+  question: 'Dies ist unsere Frage Nummer 3',
+  answer: 'Dies ist unsere schlaue Antwort'
+}];
+
+function initCard() {
+  cardArray.forEach(createCard);
+}
+
+function createCard() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$question = _ref.question,
+      question = _ref$question === void 0 ? 'lorem ipsum dolor' : _ref$question,
+      _ref$answer = _ref.answer,
+      answer = _ref$answer === void 0 ? 'sit amet, consetetur sadipscing' : _ref$answer;
+
+  var newCard = document.createElement('section');
+  newCard.className = 'card s-box p-l-r-20 m-t-b-20 b-4-blue';
+  var target = (0, _util.get)('.page__index');
+  target.appendChild(newCard);
+  newCard.innerHTML =
+  /*html*/
+  "<button class=\"card__bookmark\">\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      height=\"24\"\n      viewBox=\"0 0 24 24\"\n      width=\"24\"\n      class=\"w-h-60\"\n    >\n      <path d=\"M0 0h24v24H0V0z\" fill=\"none\" />\n      <path\n        d=\"M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z\"\n        fill=\"currentcolor\"\n      />\n    </svg>\n  </button>\n  <h2 class=\"m-t-b-10\">QUESTION:</h2>\n  <p class=\"m-t-b-10\">\n    ".concat(question, "\n  </p>\n  <button class=\"card__button b-4-blue m-10 p-10\">SHOW ANSWER</button>\n  <p class=\"card__answer hidden\">\n    ").concat(answer, "\n  </p>\n  <ul class=\"card__tags p-0\">\n    <li>lorem</li>\n    <li>ipsum</li>\n    <li>dolor</li>\n    <li>sit</li>\n  </ul>");
 }
 },{"./util":"src/js/util.js"}],"src/js/form.js":[function(require,module,exports) {
 "use strict";
@@ -265,8 +323,10 @@ var _darkmode = require("./darkmode");
 
 (0, _util.get)();
 (0, _util.getAll)();
+(0, _card.initCard)();
+(0, _card.initShowAnswer)();
 (0, _navigation.initNavigation)();
-(0, _card.initCardToggle)();
+(0, _card.initBookmarkToggle)();
 (0, _form.initFormReset)();
 (0, _darkmode.initDarkmode)();
 },{"./util":"src/js/util.js","./navigation":"src/js/navigation.js","./card":"src/js/card.js","./form":"src/js/form.js","./darkmode":"src/js/darkmode.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

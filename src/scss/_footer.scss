@@ -3,7 +3,7 @@ footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: powderblue;
+  background-color: var(--blue2);
 }
 
 .nav {
@@ -12,7 +12,7 @@ footer {
   align-items: center;
   list-style-type: none;
   width: 100vw;
-  background-color: powderblue;
+  background-color: var(--blue2);
 }
 
 .nav__icon {
@@ -23,6 +23,6 @@ footer {
 .nav__bookmarks,
 .nav__create,
 .nav__profile {
-  background-color: powderblue;
+  background-color: var(--blue2);
   border-style: none;
 }

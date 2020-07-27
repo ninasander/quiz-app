@@ -3,7 +3,11 @@ header {
   position: fixed;
   height: 64px;
   width: 100%;
-  background-color: powderblue;
+  background-color: var(--blue2);
   justify-content: center;
   align-items: center;
+}
+
+h1 {
+  color: var(--darkred);
 }

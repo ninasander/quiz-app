@@ -11,7 +11,7 @@ body {
   flex-wrap: wrap;
   justify-content: start;
   align-content: center;
-  background-color: lightcyan;
+  background-color: var(--blue3);
 }
 
 .card__bookmark {
@@ -19,11 +19,11 @@ body {
   margin-top: -5%;
   border: none;
   background: none;
-  color: #9dcadb;
+  color: var(--blue2);
 }
 
 .card__bookmark--active {
-  color: #690038;
+  color: var(--darkred);
 }
 
 .card__button {
@@ -40,6 +40,13 @@ body {
   justify-content: space-evenly;
 }
 
+:root {
+  --darkred: #690038;
+  --blue1: #033c51;
+  --blue2: #9dcadb;
+  --blue3: #c7e6f2;
+}
+
 .darkmode {
   background-color: darkslategray !important;
 }
@@ -49,7 +56,7 @@ footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: powderblue;
+  background-color: var(--blue2);
 }
 
 .nav {
@@ -58,7 +65,7 @@ footer {
   align-items: center;
   list-style-type: none;
   width: 100vw;
-  background-color: powderblue;
+  background-color: var(--blue2);
 }
 
 .nav__icon {
@@ -69,7 +76,7 @@ footer {
 .nav__bookmarks,
 .nav__create,
 .nav__profile {
-  background-color: powderblue;
+  background-color: var(--blue2);
   border-style: none;
 }
 
@@ -78,13 +85,18 @@ header {
   position: fixed;
   height: 64px;
   width: 100%;
-  background-color: powderblue;
+  background-color: var(--blue2);
   justify-content: center;
   align-items: center;
 }
 
+h1 {
+  color: var(--darkred);
+}
+
 main {
   overflow: scroll;
+  height: 100vh;
 }
 
 .main__create {
@@ -114,7 +126,7 @@ main {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  background-color: #690038;
+  background-color: var(--darkred);
 }
 
 .hidden {
@@ -162,7 +174,7 @@ main {
 }
 
 .b-4-blue {
-  border: 4px solid powderblue;
+  border: 4px solid var(--blue2);
 }
 
 .h-64 {
@@ -182,22 +194,6 @@ main {
   height: 60px;
 }
 
-.color-accent {
-  color: #690038;
-}
-
-.color-dark {
-  color: #033c51;
-}
-
-.color-main {
-  color: #9dcadb;
-}
-
-.color-light {
-  color: #c7e6f2;
-}
-
 .font-r {
   font-family: "Raleway", sans-serif;
 }
@@ -207,19 +203,19 @@ main {
 }
 
 .s-box {
-  box-shadow: 4px 4px 8px #033c51;
+  box-shadow: 4px 4px 8px var(--blue1);
 }
 
 .s-header {
-  box-shadow: 0 4px 8px #033c51;
+  box-shadow: 0 4px 8px var(--blue1);
 }
 
 .s-footer {
-  box-shadow: 0 -4px 8px #033c51;
+  box-shadow: 0 -4px 8px var(--blue1);
 }
 
 .bg-color {
-  background-color: #c7e6f2;
+  background-color: var(--blue3);
 }
 
 /*# sourceMappingURL=/styles.cbb799b3.css.map */
