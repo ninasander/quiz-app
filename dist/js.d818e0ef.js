@@ -146,36 +146,48 @@ exports.initNavigation = initNavigation;
 var _util = require("./util");
 
 function initNavigation() {
-  // Navigation
-  var buttonIndex = (0, _util.get)('.nav__home');
-  var buttonBookmarks = (0, _util.get)('.nav__bookmarks');
-  var buttonCreate = (0, _util.get)('.nav__create');
-  var buttonProfile = (0, _util.get)('.nav__profile');
-  var pageIndex = (0, _util.get)('.page__index');
-  var pageBookmarks = (0, _util.get)('.page__bookmarks');
-  var pageCreate = (0, _util.get)('.page__create');
-  var pageProfile = (0, _util.get)('.page__profile'); // Navigation
-
-  buttonIndex.addEventListener('click', function () {
-    nav(pageIndex);
-  });
-  buttonBookmarks.addEventListener('click', function () {
-    nav(pageBookmarks);
-  });
-  buttonCreate.addEventListener('click', function () {
-    nav(pageCreate);
-  });
-  buttonProfile.addEventListener('click', function () {
-    nav(pageProfile);
-  });
-
-  function nav(currentPage) {
-    pageIndex.classList.add('hidden');
-    pageBookmarks.classList.add('hidden');
-    pageCreate.classList.add('hidden');
-    pageProfile.classList.add('hidden');
-    currentPage.classList.remove('hidden');
-  }
+  var navIcons = (0, _util.getAll)('[data-js=nav-icon]');
+  var pages = (0, _util.getAll)('[data-js=page]');
+  navIcons.forEach(function (icon) {
+    icon.addEventListener('click', function () {
+      var iconName = icon.dataset.name;
+      pages.forEach(function (page) {
+        var pageName = page.dataset.name;
+        page.classList.toggle('hidden', pageName !== iconName);
+      });
+      navIcons.forEach(function (oneOfAllIcons) {
+        oneOfAllIcons.classList.toggle('nav__icon--active', oneOfAllIcons === icon);
+      });
+    });
+  }); // // Navigation
+  // const buttonIndex = get('.nav__home')
+  // const buttonBookmarks = get('.nav__bookmarks')
+  // const buttonCreate = get('.nav__create')
+  // const buttonProfile = get('.nav__profile')
+  // const pageIndex = get('.page__index')
+  // const pageBookmarks = get('.page__bookmarks')
+  // const pageCreate = get('.page__create')
+  // const pageProfile = get('.page__profile')
+  // // Navigation
+  // buttonIndex.addEventListener('click', () => {
+  //   nav(pageIndex)
+  // })
+  // buttonBookmarks.addEventListener('click', () => {
+  //   nav(pageBookmarks)
+  // })
+  // buttonCreate.addEventListener('click', () => {
+  //   nav(pageCreate)
+  // })
+  // buttonProfile.addEventListener('click', () => {
+  //   nav(pageProfile)
+  // })
+  // function nav(currentPage) {
+  //   pageIndex.classList.add('hidden')
+  //   pageBookmarks.classList.add('hidden')
+  //   pageCreate.classList.add('hidden')
+  //   pageProfile.classList.add('hidden')
+  //   currentPage.classList.remove('hidden')
+  // }
 }
 },{"./util":"src/js/util.js"}],"src/js/card.js":[function(require,module,exports) {
 "use strict";
@@ -217,24 +229,7 @@ function initBookmarkToggle() {
       bookmark.classList.toggle(classname);
     };
   }
-} // export function initCardToggle() {
-//   // Bookmark Toggle
-//   const bookmark = get('.card__bookmark')
-//   // Show Answer Button
-//   // Bookmark Toggle
-//   bookmark.addEventListener('click', () => {
-//     bookmark.classList.toggle('card__bookmark--active')
-//   })
-// Show Answer Button
-//   buttonAnswer.addEventListener('click', () => {
-//     answerText.classList.toggle('hidden')
-//     if (buttonAnswer.textContent === 'SHOW ANSWER') {
-//       buttonAnswer.textContent = 'HIDE ANSWER'
-//     } else {
-//       buttonAnswer.textContent = 'SHOW ANSWER'
-//     }
-//   })
-
+}
 
 var cardArray = [{
   question: 'Dies ist unsere Frage Nummer 1',

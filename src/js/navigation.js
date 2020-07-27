@@ -1,38 +1,59 @@
-import { get } from './util'
+import { getAll } from './util'
 
 export function initNavigation() {
-  // Navigation
-  const buttonIndex = get('.nav__home')
-  const buttonBookmarks = get('.nav__bookmarks')
-  const buttonCreate = get('.nav__create')
-  const buttonProfile = get('.nav__profile')
-  const pageIndex = get('.page__index')
-  const pageBookmarks = get('.page__bookmarks')
-  const pageCreate = get('.page__create')
-  const pageProfile = get('.page__profile')
+  const navIcons = getAll('[data-js=nav-icon]')
+  const pages = getAll('[data-js=page]')
 
-  // Navigation
-  buttonIndex.addEventListener('click', () => {
-    nav(pageIndex)
+  navIcons.forEach((icon) => {
+    icon.addEventListener('click', () => {
+      const iconName = icon.dataset.name
+
+      pages.forEach((page) => {
+        const pageName = page.dataset.name
+        page.classList.toggle('hidden', pageName !== iconName)
+      })
+
+      navIcons.forEach((oneOfAllIcons) => {
+        oneOfAllIcons.classList.toggle(
+          'nav__icon--active',
+          oneOfAllIcons === icon
+        )
+      })
+    })
   })
 
-  buttonBookmarks.addEventListener('click', () => {
-    nav(pageBookmarks)
-  })
+  // // Navigation
+  // const buttonIndex = get('.nav__home')
+  // const buttonBookmarks = get('.nav__bookmarks')
+  // const buttonCreate = get('.nav__create')
+  // const buttonProfile = get('.nav__profile')
+  // const pageIndex = get('.page__index')
+  // const pageBookmarks = get('.page__bookmarks')
+  // const pageCreate = get('.page__create')
+  // const pageProfile = get('.page__profile')
 
-  buttonCreate.addEventListener('click', () => {
-    nav(pageCreate)
-  })
+  // // Navigation
+  // buttonIndex.addEventListener('click', () => {
+  //   nav(pageIndex)
+  // })
 
-  buttonProfile.addEventListener('click', () => {
-    nav(pageProfile)
-  })
+  // buttonBookmarks.addEventListener('click', () => {
+  //   nav(pageBookmarks)
+  // })
 
-  function nav(currentPage) {
-    pageIndex.classList.add('hidden')
-    pageBookmarks.classList.add('hidden')
-    pageCreate.classList.add('hidden')
-    pageProfile.classList.add('hidden')
-    currentPage.classList.remove('hidden')
-  }
+  // buttonCreate.addEventListener('click', () => {
+  //   nav(pageCreate)
+  // })
+
+  // buttonProfile.addEventListener('click', () => {
+  //   nav(pageProfile)
+  // })
+
+  // function nav(currentPage) {
+  //   pageIndex.classList.add('hidden')
+  //   pageBookmarks.classList.add('hidden')
+  //   pageCreate.classList.add('hidden')
+  //   pageProfile.classList.add('hidden')
+  //   currentPage.classList.remove('hidden')
+  // }
 }

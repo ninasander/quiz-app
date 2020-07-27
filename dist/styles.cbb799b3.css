@@ -68,8 +68,13 @@ footer {
   background-color: var(--blue2);
 }
 
+.nav__icon--active {
+  color: var(--darkred) !important;
+}
+
 .nav__icon {
-  width: 50px;
+  width: 45px;
+  color: var(--blue1);
 }
 
 .nav__home,

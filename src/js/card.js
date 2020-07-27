@@ -35,27 +35,6 @@ export function initBookmarkToggle() {
   }
 }
 
-// export function initCardToggle() {
-//   // Bookmark Toggle
-//   const bookmark = get('.card__bookmark')
-//   // Show Answer Button
-
-//   // Bookmark Toggle
-//   bookmark.addEventListener('click', () => {
-//     bookmark.classList.toggle('card__bookmark--active')
-//   })
-
-// Show Answer Button
-
-//   buttonAnswer.addEventListener('click', () => {
-//     answerText.classList.toggle('hidden')
-//     if (buttonAnswer.textContent === 'SHOW ANSWER') {
-//       buttonAnswer.textContent = 'HIDE ANSWER'
-//     } else {
-//       buttonAnswer.textContent = 'SHOW ANSWER'
-//     }
-//   })
-
 const cardArray = [
   {
     question: 'Dies ist unsere Frage Nummer 1',
