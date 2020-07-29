@@ -167,43 +167,13 @@ function initNavigation() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.initShowAnswer = initShowAnswer;
-exports.initBookmarkToggle = initBookmarkToggle;
 exports.initCards = initCards;
 exports.createCard = createCard;
+exports.cards = void 0;
 
 var _util = require("./util");
 
-function initShowAnswer() {
-  var cardList = (0, _util.getAll)('section.card');
-  cardList.forEach(function (card) {
-    addToggleLogic(card);
-  });
-
-  function addToggleLogic(card) {
-    var textShowAnswer = card.querySelector('.card__answer');
-    var buttonShowAnswer = card.querySelector('.card__button');
-    buttonShowAnswer === null || buttonShowAnswer === void 0 ? void 0 : buttonShowAnswer.addEventListener('click', function () {
-      textShowAnswer.classList.toggle('hidden');
-      buttonShowAnswer.textContent = buttonShowAnswer.textContent === 'Hide answer' ? 'Show answer' : 'Hide answer';
-    });
-  }
-}
-
-function initBookmarkToggle() {
-  var bookmarks = (0, _util.getAll)('.card__bookmark');
-  bookmarks.forEach(function (bookmark) {
-    bookmark.addEventListener('click', bookmarkToggle(bookmark, 'card__bookmark--active'));
-  });
-
-  function bookmarkToggle(bookmark, classname) {
-    return function () {
-      bookmark.classList.toggle(classname);
-    };
-  }
-}
-
-var cardArray = [{
+var cards = [{
   question: 'Dies ist unsere Frage Nummer 1',
   answer: 'Dies ist unsere schlaue Antwort',
   tags: ['css', 'html']
@@ -215,9 +185,10 @@ var cardArray = [{
   question: 'Dies ist unsere Frage Nummer 3',
   answer: 'Dies ist unsere schlaue Antwort'
 }];
+exports.cards = cards;
 
 function initCards() {
-  cardArray.forEach(createCard);
+  cards.forEach(createCard);
 }
 
 function createCard() {
@@ -240,8 +211,26 @@ function createCard() {
   });
   newCard.innerHTML =
   /*html*/
-  "<button class=\"card__bookmark\">\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      height=\"24\"\n      viewBox=\"0 0 24 24\"\n      width=\"24\"\n      class=\"w-h-60\"\n    >\n      <path d=\"M0 0h24v24H0V0z\" fill=\"none\" />\n      <path\n        d=\"M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z\"\n        fill=\"currentcolor\"\n      />\n    </svg>\n  </button>\n  <h2 class=\"m-t-b-10\">QUESTION:</h2>\n  <p class=\"m-t-b-10\">\n    ".concat(question, "\n  </p>\n  <button class=\"card__button b-4-blue m-10 p-10\">SHOW ANSWER</button>\n  <p class=\"card__answer hidden\">\n    ").concat(answer, "\n  </p>\n  ");
+  "<button data-js=\"bookmark\" class=\"card__bookmark\">\n  <svg\n  xmlns=\"http://www.w3.org/2000/svg\"\n  height=\"24\"\n  viewBox=\"0 0 24 24\"\n  width=\"24\"\n  class=\"w-h-60\"\n  >\n  <path d=\"M0 0h24v24H0V0z\" fill=\"none\" />\n  <path\n  d=\"M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z\"\n  fill=\"currentcolor\"\n  />\n  </svg>\n  </button>\n  <h2 class=\"m-t-b-10\">QUESTION:</h2>\n  <p class=\"m-t-b-10\">\n  ".concat(question, "\n  </p>\n  <button class=\"card__button b-4-blue m-10 p-10\">SHOW ANSWER</button>\n  <p class=\"card__answer hidden\">\n  ").concat(answer, "\n  </p>\n  ");
   newCard.appendChild(tagList);
+  addToggleLogic(newCard);
+  addBookmarkLogic(newCard);
+}
+
+function addToggleLogic(card) {
+  var textShowAnswer = card.querySelector('.card__answer');
+  var buttonShowAnswer = card.querySelector('.card__button');
+  buttonShowAnswer === null || buttonShowAnswer === void 0 ? void 0 : buttonShowAnswer.addEventListener('click', function () {
+    textShowAnswer.classList.toggle('hidden');
+    buttonShowAnswer.textContent = buttonShowAnswer.textContent === 'Hide answer' ? 'Show answer' : 'Hide answer';
+  });
+}
+
+function addBookmarkLogic(card) {
+  var bookmark = card.querySelector('[data-js="bookmark"]');
+  bookmark.addEventListener('click', function () {
+    return bookmark.classList.toggle('card__bookmark--active');
+  });
 }
 },{"./util":"src/js/util.js"}],"src/js/form.js":[function(require,module,exports) {
 "use strict";
@@ -249,18 +238,33 @@ function createCard() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.initFormReset = initFormReset;
+exports.initFormSubmit = initFormSubmit;
 
 var _util = require("./util");
 
-function initFormReset() {
+var _card = require("./card");
+
+function initFormSubmit() {
   var form = (0, _util.get)('form');
   form === null || form === void 0 ? void 0 : form.addEventListener('submit', function (event) {
     event.preventDefault();
+    var question = form.question,
+        answer = form.answer,
+        tags = form.tags;
+
+    _card.cards.push({
+      question: question.value,
+      answer: answer.value,
+      tags: tags.value.split(',').map(function (tag) {
+        return tag.trim();
+      })
+    });
+
+    console.log('card created');
     form.reset();
   });
 }
-},{"./util":"src/js/util.js"}],"src/js/darkmode.js":[function(require,module,exports) {
+},{"./util":"src/js/util.js","./card":"src/js/card.js"}],"src/js/darkmode.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -288,8 +292,6 @@ function initDarkmode() {
 },{"./util":"src/js/util.js"}],"src/js/index.js":[function(require,module,exports) {
 "use strict";
 
-var _util = require("./util");
-
 var _navigation = require("./navigation");
 
 var _card = require("./card");
@@ -298,15 +300,15 @@ var _form = require("./form");
 
 var _darkmode = require("./darkmode");
 
-(0, _util.get)();
-(0, _util.getAll)();
-(0, _card.initCards)();
-(0, _card.initShowAnswer)();
-(0, _navigation.initNavigation)();
-(0, _card.initBookmarkToggle)();
-(0, _form.initFormReset)();
-(0, _darkmode.initDarkmode)();
-},{"./util":"src/js/util.js","./navigation":"src/js/navigation.js","./card":"src/js/card.js","./form":"src/js/form.js","./darkmode":"src/js/darkmode.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
+    (0, _card.initCards)();
+    (0, _navigation.initNavigation)();
+    (0, _form.initFormSubmit)();
+    (0, _darkmode.initDarkmode)();
+  });
+});
+},{"./navigation":"src/js/navigation.js","./card":"src/js/card.js","./form":"src/js/form.js","./darkmode":"src/js/darkmode.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -334,7 +336,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63619" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64064" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,41 +1,6 @@
-import { get, getAll } from './util'
+import { get } from './util'
 
-export function initShowAnswer() {
-  const cardList = getAll('section.card')
-  cardList.forEach((card) => {
-    addToggleLogic(card)
-  })
-  function addToggleLogic(card) {
-    const textShowAnswer = card.querySelector('.card__answer')
-    const buttonShowAnswer = card.querySelector('.card__button')
-    buttonShowAnswer?.addEventListener('click', () => {
-      textShowAnswer.classList.toggle('hidden')
-      buttonShowAnswer.textContent =
-        buttonShowAnswer.textContent === 'Hide answer'
-          ? 'Show answer'
-          : 'Hide answer'
-    })
-  }
-}
-
-export function initBookmarkToggle() {
-  const bookmarks = getAll('.card__bookmark')
-
-  bookmarks.forEach((bookmark) => {
-    bookmark.addEventListener(
-      'click',
-      bookmarkToggle(bookmark, 'card__bookmark--active')
-    )
-  })
-
-  function bookmarkToggle(bookmark, classname) {
-    return () => {
-      bookmark.classList.toggle(classname)
-    }
-  }
-}
-
-const cardArray = [
+export const cards = [
   {
     question: 'Dies ist unsere Frage Nummer 1',
     answer: 'Dies ist unsere schlaue Antwort',
@@ -53,7 +18,7 @@ const cardArray = [
 ]
 
 export function initCards() {
-  cardArray.forEach(createCard)
+  cards.forEach(createCard)
 }
 
 export function createCard({ question, answer, tags = [] } = {}) {
@@ -72,29 +37,50 @@ export function createCard({ question, answer, tags = [] } = {}) {
 
   newCard.innerHTML =
     /*html*/
-    `<button class="card__bookmark">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
-      class="w-h-60"
-    >
-      <path d="M0 0h24v24H0V0z" fill="none" />
-      <path
-        d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"
-        fill="currentcolor"
-      />
-    </svg>
+    `<button data-js="bookmark" class="card__bookmark">
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  height="24"
+  viewBox="0 0 24 24"
+  width="24"
+  class="w-h-60"
+  >
+  <path d="M0 0h24v24H0V0z" fill="none" />
+  <path
+  d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"
+  fill="currentcolor"
+  />
+  </svg>
   </button>
   <h2 class="m-t-b-10">QUESTION:</h2>
   <p class="m-t-b-10">
-    ${question}
+  ${question}
   </p>
   <button class="card__button b-4-blue m-10 p-10">SHOW ANSWER</button>
   <p class="card__answer hidden">
-    ${answer}
+  ${answer}
   </p>
   `
   newCard.appendChild(tagList)
+  addToggleLogic(newCard)
+  addBookmarkLogic(newCard)
+}
+
+function addToggleLogic(card) {
+  const textShowAnswer = card.querySelector('.card__answer')
+  const buttonShowAnswer = card.querySelector('.card__button')
+  buttonShowAnswer?.addEventListener('click', () => {
+    textShowAnswer.classList.toggle('hidden')
+    buttonShowAnswer.textContent =
+      buttonShowAnswer.textContent === 'Hide answer'
+        ? 'Show answer'
+        : 'Hide answer'
+  })
+}
+
+function addBookmarkLogic(card) {
+  const bookmark = card.querySelector('[data-js="bookmark"]')
+  bookmark.addEventListener('click', () =>
+    bookmark.classList.toggle('card__bookmark--active')
+  )
 }
