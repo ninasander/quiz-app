@@ -39,10 +39,12 @@ const cardArray = [
   {
     question: 'Dies ist unsere Frage Nummer 1',
     answer: 'Dies ist unsere schlaue Antwort',
+    tags: ['css', 'html'],
   },
   {
     question: 'Dies ist unsere Frage Nummer 2',
     answer: 'Dies ist unsere schlaue Antwort',
+    tags: ['array', 'methods', 'javascript', 'es6'],
   },
   {
     question: 'Dies ist unsere Frage Nummer 3',
@@ -50,18 +52,24 @@ const cardArray = [
   },
 ]
 
-export function initCard() {
+export function initCards() {
   cardArray.forEach(createCard)
 }
 
-export function createCard({
-  question = 'lorem ipsum dolor',
-  answer = 'sit amet, consetetur sadipscing',
-} = {}) {
+export function createCard({ question, answer, tags = [] } = {}) {
   const newCard = document.createElement('section')
   newCard.className = 'card s-box p-l-r-20 m-t-b-20 b-4-blue'
   const target = get('.page__index')
   target.appendChild(newCard)
+
+  const tagList = document.createElement('ul')
+  tagList.classList.add('card__tags', 'p-0')
+  tags.forEach((tag) => {
+    const listItem = document.createElement('li')
+    listItem.innerHTML = tag
+    tagList.appendChild(listItem)
+  })
+
   newCard.innerHTML =
     /*html*/
     `<button class="card__bookmark">
@@ -87,10 +95,6 @@ export function createCard({
   <p class="card__answer hidden">
     ${answer}
   </p>
-  <ul class="card__tags p-0">
-    <li>lorem</li>
-    <li>ipsum</li>
-    <li>dolor</li>
-    <li>sit</li>
-  </ul>`
+  `
+  newCard.appendChild(tagList)
 }

@@ -159,35 +159,7 @@ function initNavigation() {
         oneOfAllIcons.classList.toggle('nav__icon--active', oneOfAllIcons === icon);
       });
     });
-  }); // // Navigation
-  // const buttonIndex = get('.nav__home')
-  // const buttonBookmarks = get('.nav__bookmarks')
-  // const buttonCreate = get('.nav__create')
-  // const buttonProfile = get('.nav__profile')
-  // const pageIndex = get('.page__index')
-  // const pageBookmarks = get('.page__bookmarks')
-  // const pageCreate = get('.page__create')
-  // const pageProfile = get('.page__profile')
-  // // Navigation
-  // buttonIndex.addEventListener('click', () => {
-  //   nav(pageIndex)
-  // })
-  // buttonBookmarks.addEventListener('click', () => {
-  //   nav(pageBookmarks)
-  // })
-  // buttonCreate.addEventListener('click', () => {
-  //   nav(pageCreate)
-  // })
-  // buttonProfile.addEventListener('click', () => {
-  //   nav(pageProfile)
-  // })
-  // function nav(currentPage) {
-  //   pageIndex.classList.add('hidden')
-  //   pageBookmarks.classList.add('hidden')
-  //   pageCreate.classList.add('hidden')
-  //   pageProfile.classList.add('hidden')
-  //   currentPage.classList.remove('hidden')
-  // }
+  });
 }
 },{"./util":"src/js/util.js"}],"src/js/card.js":[function(require,module,exports) {
 "use strict";
@@ -197,7 +169,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.initShowAnswer = initShowAnswer;
 exports.initBookmarkToggle = initBookmarkToggle;
-exports.initCard = initCard;
+exports.initCards = initCards;
 exports.createCard = createCard;
 
 var _util = require("./util");
@@ -233,33 +205,43 @@ function initBookmarkToggle() {
 
 var cardArray = [{
   question: 'Dies ist unsere Frage Nummer 1',
-  answer: 'Dies ist unsere schlaue Antwort'
+  answer: 'Dies ist unsere schlaue Antwort',
+  tags: ['css', 'html']
 }, {
   question: 'Dies ist unsere Frage Nummer 2',
-  answer: 'Dies ist unsere schlaue Antwort'
+  answer: 'Dies ist unsere schlaue Antwort',
+  tags: ['array', 'methods', 'javascript', 'es6']
 }, {
   question: 'Dies ist unsere Frage Nummer 3',
   answer: 'Dies ist unsere schlaue Antwort'
 }];
 
-function initCard() {
+function initCards() {
   cardArray.forEach(createCard);
 }
 
 function createCard() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref$question = _ref.question,
-      question = _ref$question === void 0 ? 'lorem ipsum dolor' : _ref$question,
-      _ref$answer = _ref.answer,
-      answer = _ref$answer === void 0 ? 'sit amet, consetetur sadipscing' : _ref$answer;
+      question = _ref.question,
+      answer = _ref.answer,
+      _ref$tags = _ref.tags,
+      tags = _ref$tags === void 0 ? [] : _ref$tags;
 
   var newCard = document.createElement('section');
   newCard.className = 'card s-box p-l-r-20 m-t-b-20 b-4-blue';
   var target = (0, _util.get)('.page__index');
   target.appendChild(newCard);
+  var tagList = document.createElement('ul');
+  tagList.classList.add('card__tags', 'p-0');
+  tags.forEach(function (tag) {
+    var listItem = document.createElement('li');
+    listItem.innerHTML = tag;
+    tagList.appendChild(listItem);
+  });
   newCard.innerHTML =
   /*html*/
-  "<button class=\"card__bookmark\">\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      height=\"24\"\n      viewBox=\"0 0 24 24\"\n      width=\"24\"\n      class=\"w-h-60\"\n    >\n      <path d=\"M0 0h24v24H0V0z\" fill=\"none\" />\n      <path\n        d=\"M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z\"\n        fill=\"currentcolor\"\n      />\n    </svg>\n  </button>\n  <h2 class=\"m-t-b-10\">QUESTION:</h2>\n  <p class=\"m-t-b-10\">\n    ".concat(question, "\n  </p>\n  <button class=\"card__button b-4-blue m-10 p-10\">SHOW ANSWER</button>\n  <p class=\"card__answer hidden\">\n    ").concat(answer, "\n  </p>\n  <ul class=\"card__tags p-0\">\n    <li>lorem</li>\n    <li>ipsum</li>\n    <li>dolor</li>\n    <li>sit</li>\n  </ul>");
+  "<button class=\"card__bookmark\">\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      height=\"24\"\n      viewBox=\"0 0 24 24\"\n      width=\"24\"\n      class=\"w-h-60\"\n    >\n      <path d=\"M0 0h24v24H0V0z\" fill=\"none\" />\n      <path\n        d=\"M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z\"\n        fill=\"currentcolor\"\n      />\n    </svg>\n  </button>\n  <h2 class=\"m-t-b-10\">QUESTION:</h2>\n  <p class=\"m-t-b-10\">\n    ".concat(question, "\n  </p>\n  <button class=\"card__button b-4-blue m-10 p-10\">SHOW ANSWER</button>\n  <p class=\"card__answer hidden\">\n    ").concat(answer, "\n  </p>\n  ");
+  newCard.appendChild(tagList);
 }
 },{"./util":"src/js/util.js"}],"src/js/form.js":[function(require,module,exports) {
 "use strict";
@@ -318,7 +300,7 @@ var _darkmode = require("./darkmode");
 
 (0, _util.get)();
 (0, _util.getAll)();
-(0, _card.initCard)();
+(0, _card.initCards)();
 (0, _card.initShowAnswer)();
 (0, _navigation.initNavigation)();
 (0, _card.initBookmarkToggle)();
@@ -352,7 +334,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63619" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
